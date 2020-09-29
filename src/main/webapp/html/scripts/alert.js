@@ -1,3 +1,4 @@
+var basePath = "/my_note";
 function closeAlertWindow(){
 	//清空对话框
 	$("#can").html("");
@@ -7,7 +8,7 @@ function closeAlertWindow(){
 //弹出新建笔记本对话框
 function addBookAlertWindow(){
 		//弹出对话框
-		$("#can").load("alert/alert_notebook.html");
+		$("#can").load(basePath+"/alert/alert_notebook");
 		//显示背景色
 	 	$(".opacity_bg").show();
 	
@@ -18,15 +19,14 @@ function addNoteAlertWindow(){
 		alert("没有选中");
 	} else {
 	//弹出对话框
-	$("#can").load("alert/alert_note.html");
+	$("#can").load(basePath+"/alert/alert_note");
 	//显示背景色
 	$(".opacity_bg").show();
 	}
 }
 function addNoteDelAlertWindow(){
 	//给删除按钮添加弹出框
-	$("#can").load("alert/alert_delete_note.html");
+	$("#can").load(basePath+"/alert/alert_delete_note");
 	//显示背景颜色
 	$(".opacity_bg").show();
-	
 }

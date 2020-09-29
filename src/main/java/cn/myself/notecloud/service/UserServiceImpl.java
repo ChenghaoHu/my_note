@@ -1,22 +1,18 @@
 package cn.myself.notecloud.service;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.myself.notecloud.dao.UserDao;
-import cn.myself.notecloud.entity.Book;
 import cn.myself.notecloud.entity.User;
 import cn.myself.notecloud.exception.NameException;
 import cn.myself.notecloud.exception.PasswordException;
 import cn.myself.notecloud.util.NoteUtil;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
-	@Resource
-	private UserDao userDao;
+	
+	@Autowired UserDao userDao;
 
 	public User login(String name, String password) throws NameException,
 			PasswordException {

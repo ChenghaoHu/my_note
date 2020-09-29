@@ -3,10 +3,7 @@ package cn.myself.notecloud.service;
 import java.sql.Timestamp;
 import java.util.List;
 
-
-
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.myself.notecloud.dao.BookDao;
@@ -15,12 +12,13 @@ import cn.myself.notecloud.entity.Book;
 import cn.myself.notecloud.entity.User;
 import cn.myself.notecloud.exception.UserNotFoundException;
 import cn.myself.notecloud.util.NoteUtil;
-@Service("bookService")
+
+@Service
 public class BookServiceImpl implements BookService {
-	@Resource
-	private BookDao bookDao;
-	@Resource
-	private UserDao userDao;
+
+	@Autowired BookDao bookDao;
+	@Autowired UserDao userDao;
+
 	public List<Book> listBooks(String userId) {
 		if(userId==null || userId.trim().isEmpty())
 		{
@@ -33,10 +31,10 @@ public class BookServiceImpl implements BookService {
 		}
 		List<Book> books=bookDao.findByUserId(user.getId());
 		return books;
-		
+
 	}
-	public Book addBook(String userId, String bookName)
-			throws UserNotFoundException {
+	
+	public Book addBook(String userId, String bookName) throws UserNotFoundException {
 		if(userId==null ||userId.trim().isEmpty())
 		{
 			throw new UserNotFoundException("userId不能为空");

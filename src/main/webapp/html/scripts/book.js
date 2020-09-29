@@ -1,40 +1,40 @@
 function loadBooks() {
 	//获取参数userId
 	var userId=getCookie("userId");
-	//console.log(userId);
+	console.log(userId);
 	//判断userId是否有效
-	if(userId==null)
-		{
-			window.location.href="log_in.html";
-		}else{
-			$.ajax({
-				url:path+"/book/loadBooks.do",
-				type:"post",
-				data:{"userId":userId},
-				dataType:"json",
-				success:function(result)//回调函数
+	if(userId==null){
+		window.location.href="login";
+	}else{
+		$.ajax({
+			url: path+"/book/loadBooks",
+			type: "post",
+			data:{"userId":userId},
+			dataType:"json",
+			success:function(result)//回调函数
+			{
+				if(result.state==0)
 				{
-					if(result.state==0)
-						{
-						//获取笔记本集合
-							var books=result.data;
-							//遍历集合
-							for(var i=0;i<books.length;i++)
-								{
-									//获取笔记本ID
-									var bookId=books[i].id;
-									//获取笔记本名称
-									var bookName=books[i].name;
-									createBookLi(bookId,bookName);
-								}
-						}
-				},
-				error:function(){
-					alert("笔记本加载失败");
+					//获取笔记本集合
+					var books=result.data;
+					//遍历集合
+					for(var i=0;i<books.length;i++)
+					{
+						//获取笔记本ID
+						var bookId=books[i].id;
+						//获取笔记本名称
+						var bookName=books[i].name;
+						createBookLi(bookId,bookName);
+					}
 				}
-					
-			})
-		}
+			},
+			error:function(xhr){
+				console.log(xhr.status);
+				alert("笔记本加载失败");
+			}
+
+		})
+	}
 }
 function createBookLi(bookId,bookName)
 {
@@ -43,8 +43,8 @@ function createBookLi(bookId,bookName)
 	sli+='<a>';
 	sli+='<i class="fa fa-book" title="online" rel="tooltip-bottom">';
 	sli+='</i> ';
-	sli+=bookName
-	sli+='</a>'
+	sli+=bookName;
+	sli+='</a>';
 	sli+='</li>';
 	//将字符串转换成jQuery对象
 	var $li=$(sli);
@@ -61,7 +61,7 @@ function addBookAction(){
 	//参数格式校验
 	var ok = true;
 	if (userId == null) {
-		window.location.href = "log_in.html";
+		window.location.href = "login";
 		ok = false;
 	}
 	if (bookName == "") {
@@ -71,7 +71,7 @@ function addBookAction(){
 	alert("ok is" + ok);
 	if (ok) {
 		$.ajax({
-			url : path + "/book/add.do",
+			url : path + "/book/add",
 			type : "post",
 			data : {
 				"userId" : userId,
@@ -97,4 +97,3 @@ function addBookAction(){
 		});
 	}
 }
-

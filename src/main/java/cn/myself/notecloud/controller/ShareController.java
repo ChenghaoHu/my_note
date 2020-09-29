@@ -2,15 +2,13 @@ package cn.myself.notecloud.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.myself.notecloud.entity.JsonResult;
-import cn.myself.notecloud.entity.Note;
 import cn.myself.notecloud.entity.Share;
 import cn.myself.notecloud.exception.NoteNotFoundException;
 import cn.myself.notecloud.service.ShareService;
@@ -18,9 +16,10 @@ import cn.myself.notecloud.service.ShareService;
 @Controller
 @RequestMapping("/share")
 public class ShareController {
-	@Resource
-	private ShareService shareService;
-	@RequestMapping("/add.do")
+	
+	@Autowired ShareService shareService;
+	
+	@RequestMapping("/add")
 	@ResponseBody
 	public JsonResult addShare(String noteId)
 	{
@@ -30,7 +29,7 @@ public class ShareController {
 		result.setMessage("分享笔记成功");
 		return result;
 	}
-	@RequestMapping("/find.do")
+	@RequestMapping("/find")
 	@ResponseBody
 	public JsonResult searchNotes(String title,int page)
 	{

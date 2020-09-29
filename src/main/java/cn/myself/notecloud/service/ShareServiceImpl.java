@@ -4,23 +4,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.myself.notecloud.dao.NoteDao;
 import cn.myself.notecloud.dao.ShareDao;
 import cn.myself.notecloud.entity.Note;
 import cn.myself.notecloud.entity.Share;
-import cn.myself.notecloud.exception.NoteBookNotFoundException;
 import cn.myself.notecloud.exception.NoteNotFoundException;
 import cn.myself.notecloud.util.NoteUtil;
-@Service("shareService")
+
+@Service
 public class ShareServiceImpl implements ShareService{
-	@Resource
-	private NoteDao noteDao;
-	@Resource
-	private ShareDao shareDao;
+	
+	@Autowired NoteDao noteDao;
+	@Autowired ShareDao shareDao;
+	
 	public void addShare(String noteId) {
 		if(noteId==null || noteId.trim().isEmpty())
 		{
@@ -37,6 +36,7 @@ public class ShareServiceImpl implements ShareService{
 		share.setCn_share_id(NoteUtil.createId());
 		share.setCn_share_title(note.getTitle());
 		int i=shareDao.save(share);
+		System.out.println(i);
 	}
 	public List<Share> searchNotes(String title,int page) {
 		String result="%";

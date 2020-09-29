@@ -13,7 +13,7 @@ function LoadNotesAction() {
 	var bookId = $(this).data("bookId");
 	console.log("book=" + bookId);
 	$.ajax({
-		url : path + "/note/list.do",
+		url : path + "/note/list",
 		type : "post",
 		data : {
 			"bookId" : bookId
@@ -33,13 +33,7 @@ function LoadNotesAction() {
 					var noteTitle = notes[i].title;
 					// 创建笔记li元素
 					createNoteLi(noteId, noteTitle);
-
 				}
-				// if($(this).find('a').focus())
-				// {
-				// $("#add_note").click(addNoteAlertWindow);
-				// //addCookie("isFocus", true);
-				// }
 			}
 		},
 		error : function() {
@@ -52,9 +46,9 @@ function createNoteLi(noteId, noteTitle) {
 	sli += '<li class="online">';
 	sli += '<a >';
 	sli += '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'
-			+ noteTitle
-			+ '<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-chevron-down"></i></button>'
-	sli += '</a>';
+		+ noteTitle
+		+ '<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-chevron-down"></i></button>'
+		sli += '</a>';
 	sli += '<div class="note_menu" tabindex="-1">';
 	sli += '<dl>';
 	sli += '<dt><button type="button" class="btn btn-default btn-xs btn_move" title="移动至..."><i class="fa fa-random"></i></button></dt>';
@@ -74,8 +68,7 @@ function createShareLi(shareId, shareTitle) {
 	sli += '<li class="online">';
 	sli += '<a >';
 	sli += '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'
-			+ shareTitle;
-			
+		+ shareTitle;
 	sli += '</a>';
 	sli += '</li>';
 	// 将sli转换成jQuery对象
@@ -117,7 +110,7 @@ function addShareAction() {
 	console.log(noteId);
 	// 发送请求
 	$.ajax({
-		url : path + "/share/add.do",
+		url : path + "/share/add",
 		type : "post",
 		data : {
 			"noteId" : noteId
@@ -143,7 +136,7 @@ function addNoteAction() {
 	var bookId = $li.data("bookId");
 	// 发送Ajax请求
 	$.ajax({
-		url : path + "/note/add.do",
+		url : path + "/note/add",
 		type : "post",
 		data : {
 			"userId" : userId,
@@ -175,7 +168,7 @@ function delNoteAction() {
 	// var $li=$("#book_ul a.checked").parent();
 	// var bookId=$li.data("bookId");
 	$.ajax({
-		url : path + "/note/del.do",
+		url : path + "/note/del",
 		type : "post",
 		data : {
 			"noteId" : noteId
@@ -205,7 +198,7 @@ function SearchNotes(event) {// 绑定笔记模糊搜索（search_note)的键盘
 		// console.log(title);
 
 		$.ajax({
-			url : path + "/share/find.do",
+			url : path + "/share/find",
 			type : "post",
 			data : {
 				"title" : title,"page":page
@@ -244,7 +237,7 @@ function loadShareButton(){
 	var title=$("#search_note").val().trim();
 	page+=1;
 	$.ajax({
-		url : path + "/share/find.do",
+		url : path + "/share/find",
 		type : "post",
 		data : {
 			"title" : title,"page":page
@@ -269,7 +262,7 @@ function loadShareButton(){
 					var shareTitle = shares[i].cn_share_title;
 					// 创建笔记li元素
 					createShareLi(shareId, shareTitle);
-					
+
 				}
 			}
 		},

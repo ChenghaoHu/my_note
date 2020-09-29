@@ -3,8 +3,7 @@ package cn.myself.notecloud.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,24 +18,25 @@ import cn.myself.notecloud.service.NoteService;
 @Controller
 @RequestMapping("/note")
 public class NoteController extends ExceptionController {
-	@Resource
-	private NoteService noteService;
-	@RequestMapping("/list.do")
+	
+	@Autowired NoteService noteService;
+	
+	@RequestMapping("/list")
 	@ResponseBody
 	public JsonResult listNotes(String bookId)
 	{
 		List<Map<String,Object>> list=noteService.listNotes(bookId);
 		return new JsonResult(list);
-		
+
 	}
-	@RequestMapping("/add.do")
+	@RequestMapping("/add")
 	@ResponseBody
 	public JsonResult addNote(String userId,String bookId,String noteTitle)
 	{
 		Note note=noteService.addNote(userId, bookId, noteTitle);
 		return new JsonResult(note);
 	}
-	@RequestMapping("/del.do")
+	@RequestMapping("/del")
 	@ResponseBody
 	public JsonResult delNote(String noteId,String bookId)
 	{
@@ -54,9 +54,9 @@ public class NoteController extends ExceptionController {
 			result.setMessage("删除成功");
 			break;
 		}
-	}
+		}
 		return result;
-}		
+	}		
 	@ExceptionHandler(NoteBookNotFoundException.class)
 	@ResponseBody
 	public JsonResult pwdexp(NoteBookNotFoundException e)

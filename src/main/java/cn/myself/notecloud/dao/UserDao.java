@@ -1,8 +1,5 @@
 package cn.myself.notecloud.dao;
 
-import java.util.List;
-
-import cn.myself.notecloud.entity.Book;
 import cn.myself.notecloud.entity.User;
 
 public interface UserDao {

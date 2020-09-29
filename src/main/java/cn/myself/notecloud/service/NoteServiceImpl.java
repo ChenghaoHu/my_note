@@ -3,8 +3,7 @@ package cn.myself.notecloud.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.myself.notecloud.dao.BookDao;
@@ -13,16 +12,15 @@ import cn.myself.notecloud.dao.UserDao;
 import cn.myself.notecloud.entity.Book;
 import cn.myself.notecloud.entity.Note;
 import cn.myself.notecloud.exception.NoteBookNotFoundException;
-import cn.myself.notecloud.exception.NoteNotFoundException;
 import cn.myself.notecloud.util.NoteUtil;
-@Service("noteService")
+
+@Service
 public class NoteServiceImpl implements NoteService {
-	@Resource
-	private UserDao userDao;
-	@Resource
-	private NoteDao noteDao;
-	@Resource
-	private BookDao bookDao;
+	
+	@Autowired UserDao userDao;
+	@Autowired NoteDao noteDao;
+	@Autowired BookDao bookDao;
+	
 	public List<Map<String, Object>> listNotes(String bookId)
 			throws NoteBookNotFoundException {
 		if(bookId==null || bookId.trim().isEmpty())

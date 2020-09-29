@@ -1,90 +1,81 @@
-ï»¿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<meta charset="utf-8">
-<title>æˆ‘çš„ç¬”è®°</title>
+<title>ÎÒµÄ±Ê¼Ç</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="x-pjax-version" content="v173">
-<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="ico/favico-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="ico/favico-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72"
-	href="ico/favico-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed"
-	href="ico/favico-57-precomposed.png">
-<link rel="shortcut icon" href="ico/favico.png">
-<link rel="shortcut icon" href="ico/favico.ico">
-<link rel="stylesheet" href="styles/icon.css" />
-<link rel="stylesheet" href="styles/main.css" />
-<!-- Google-Codeä»£ç é«˜äº®CSS -->
-<link rel="stylesheet" href="styles/prettify.css" />
-<!-- Ueditorç¼–è¾‘å™¨CSS -->
-<link href="styles/umeditor.min.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/basevalue.js"></script>
-<script type="text/javascript" src="scripts/cookie_util.js"></script>
-<script type="text/javascript" src="scripts/book.js"></script>
-<script type="text/javascript" src="scripts/note.js"></script>
-<script type="text/javascript" src="scripts/alert.js"></script>
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="./html/ico/favico-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="./html/ico/favico-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="./html/ico/favico-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="./html/ico/favico-57-precomposed.png">
+<link rel="shortcut icon" href="./html/ico/favico.png">
+<link rel="shortcut icon" href="./html/ico/favico.ico">
+<link rel="stylesheet" href="./html/styles/icon.css" />
+<link rel="stylesheet" href="./html/styles/main.css" />
+<!-- Google-Code´úÂë¸ßÁÁCSS -->
+<link rel="stylesheet" href="./html/styles/prettify.css" />
+<!-- Ueditor±à¼­Æ÷CSS -->
+<link href="./html/styles/umeditor.min.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="./html/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="./html/scripts/basevalue.js"></script>
+<script type="text/javascript" src="./html/scripts/cookie_util.js"></script>
+<script type="text/javascript" src="./html/scripts/book.js"></script>
+<script type="text/javascript" src="./html/scripts/note.js"></script>
+<script type="text/javascript" src="./html/scripts/alert.js"></script>
 <script type="text/javascript">
-	//å…¨å±€å˜é‡ï¼Œç”¨äºåˆ†é¡µè¡¨ç¤ºæ¯é¡µæœ€å¤§æ˜¾ç¤ºæ•°
-	var page=1;
+	//È«¾Ö±äÁ¿£¬ÓÃÓÚ·ÖÒ³±íÊ¾Ã¿Ò³×î´óÏÔÊ¾Êı
+	var page = 1;
 	$(function() {
 		loadBooks();
-		//ç»‘å®šå•å‡»äº‹ä»¶  åŸ: $("#book_ul li").click(fn()); ä¸å¯è¡Œï¼Œå› ä¸ºå½“è¿™æ®µä»£ç æ‰§è¡Œçš„æ—¶å€™ï¼ŒloadBooksçš„å›è°ƒå‡½æ•°è¿˜æ²¡æœ‰æ‰§è¡Œï¼Œliå…ƒç´ è¿˜æ²¡æœ‰appendæ‰€ä»¥ clickæ— æ•ˆ
-		// å¸¦ç›‘å¬äº‹ä»¶çš„ç»‘å®šå…ƒç´   $(#"book_ul").on("click","li",fn());
+		//°ó¶¨µ¥»÷ÊÂ¼ş  Ô­: $("#book_ul li").click(fn()); ²»¿ÉĞĞ£¬ÒòÎªµ±Õâ¶Î´úÂëÖ´ĞĞµÄÊ±ºò£¬loadBooksµÄ»Øµ÷º¯Êı»¹Ã»ÓĞÖ´ĞĞ£¬liÔªËØ»¹Ã»ÓĞappendËùÒÔ clickÎŞĞ§
+		// ´ø¼àÌıÊÂ¼şµÄ°ó¶¨ÔªËØ  $(#"book_ul").on("click","li",fn());
 		$("#book_ul").on("click", "li", LoadNotesAction);
-		//ç»‘å®šåˆ›å»ºç¬”è®°æœ¬"+"æŒ‰é’®
+		//°ó¶¨´´½¨±Ê¼Ç±¾"+"°´Å¥
 		$("#add_notebook").click(addBookAlertWindow);
-		//ç»‘å®šåˆ›å»ºç¬”è®°"+"æŒ‰é’®
-		
-		//å¼¹å‡ºå¯¹è¯æ¡†
+		//°ó¶¨´´½¨±Ê¼Ç"+"°´Å¥
+
+		//µ¯³ö¶Ô»°¿ò
 		//var bookId=$Li.data("bookId");
 
 		$("#add_note").click(addNoteAlertWindow);
-		//å…³é—­å¯¹è¯æ¡†                  é€šè¿‡è¿™ä¸¤ä¸ªç±»é€‰æ‹©å™¨å¯ä»¥ç»‘å®šæ‰€æœ‰çš„å–æ¶ˆå’Œå³ä¸Šè§’çš„å°å‰
-		//é‚£ä¹ˆè¿™ä¸ª$("#can")jqueryå¯¹è±¡æ˜¯å¼¹å‡ºçš„å¯¹è±¡æ¡†çš„çˆ¶å…ƒç´ ï¼Œå®ƒçš„ä½œç”¨æ˜¯ç»™æ‰€æœ‰ç±»åæ˜¯cancleæˆ–è€…closeçš„å…ƒç´ æ·»åŠ clloseAlertWindowå‡½æ•°
+		//¹Ø±Õ¶Ô»°¿ò                  Í¨¹ıÕâÁ½¸öÀàÑ¡ÔñÆ÷¿ÉÒÔ°ó¶¨ËùÓĞµÄÈ¡ÏûºÍÓÒÉÏ½ÇµÄĞ¡²æ
+		//ÄÇÃ´Õâ¸ö$("#can")jquery¶ÔÏóÊÇµ¯³öµÄ¶ÔÏó¿òµÄ¸¸ÔªËØ£¬ËüµÄ×÷ÓÃÊÇ¸øËùÓĞÀàÃûÊÇcancle»òÕßcloseµÄÔªËØÌí¼ÓclloseAlertWindowº¯Êı
 		$("#can").on("click", ".cancle,.close", closeAlertWindow);
-		//ç»‘å®šç¬”è®°æœ¬åˆ›å»ºæŒ‰é’®
+		//°ó¶¨±Ê¼Ç±¾´´½¨°´Å¥
 		$("#can").on("click", "#addbook", addBookAction);
-		//ç»‘å®šç¬”è®°åˆ›å»ºæŒ‰é’®
-		$("#can").on("click","#addnote",addNoteAction);
-		//æ˜¾ç¤ºç¬”è®°èœå•
+		//°ó¶¨±Ê¼Ç´´½¨°´Å¥
+		$("#can").on("click", "#addnote", addNoteAction);
+		//ÏÔÊ¾±Ê¼Ç²Ëµ¥
 		showNoteMenu();
-		//ç»‘å®šåˆ†äº«æŒ‰é’®çš„å•å‡»äº‹ä»¶
-		$("#note_ul").on("click",".btn_share",addShareAction);
-		//æ·»åŠ åˆ é™¤æŒ‰é’®çš„alertWindow
-		$("#note_ul").on("click",".btn_delete",addNoteDelAlertWindow);
-		//ç»‘å®šåˆ é™¤æŒ‰é’®çš„å•å‡»äº‹ä»¶
-		$("#can").on("click","#deleteNote",delNoteAction);
-		//æœç´¢åˆ†äº«ç¬”è®°
+		//°ó¶¨·ÖÏí°´Å¥µÄµ¥»÷ÊÂ¼ş
+		$("#note_ul").on("click", ".btn_share", addShareAction);
+		//Ìí¼ÓÉ¾³ı°´Å¥µÄalertWindow
+		$("#note_ul").on("click", ".btn_delete", addNoteDelAlertWindow);
+		//°ó¶¨É¾³ı°´Å¥µÄµ¥»÷ÊÂ¼ş
+		$("#can").on("click", "#deleteNote", delNoteAction);
+		//ËÑË÷·ÖÏí±Ê¼Ç
 		$("#search_note").keydown(SearchNotes);
-		//ç‚¹å‡»åˆ†äº«ï¼ŒåŠ è½½ä¸‹ä¸€é¡µæ•°æ®
-		$("#pc_part_6").on("click","#more_note",loadShareButton);
-		
+		//µã»÷·ÖÏí£¬¼ÓÔØÏÂÒ»Ò³Êı¾İ
+		$("#pc_part_6").on("click", "#more_note", loadShareButton);
+
 	});
 </script>
 </head>
 <body class="animated fadeIn">
 	<header class="header">
 		<div class="header-brand">
-			<a data-pjax=".content-body" href="edit.html"> <img
-				class="brand-logo" src="images/dummy/8986f28e.stilearn-logo.png"
-				alt="Stilearn Admin Sample Logo">
+			<a data-pjax=".content-body" href="/my_note/index_edit">
+				<img class="brand-logo" src="./html/images/dummy/8986f28e.stilearn-logo.png" alt="Stilearn Admin Sample Logo">
 			</a>
 		</div>
 		<div class="header-profile">
 			<div class="profile-nav">
-				<span class="profile-username"></span> <a class="dropdown-toggle"
-					data-toggle="dropdown"> <span class="fa fa-angle-down"></span>
-				</a>
+				<span class="profile-username"></span> 
+				<a class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-angle-down"></span></a>
 				<ul class="dropdown-menu animated flipInX pull-right" role="menu">
-					<li><a href="Change_password.html"><i class="fa fa-user"></i>
-							ä¿®æ”¹å¯†ç </a></li>
+					<li><a href="/my_note/change_password"><i class="fa fa-user"></i>ĞŞ¸ÄÃÜÂë</a></li>
 					<li class="divider"></li>
-					<li><a id="logout" href="#"><i class="fa fa-sign-out"></i>
-							é€€å‡ºç™»å½•</a></li>
+					<li><a id="logout" href="#"><i class="fa fa-sign-out"></i>ÍË³öµÇÂ¼</a></li>
 				</ul>
 			</div>
 		</div>
@@ -93,15 +84,12 @@
 				<i class="fa fa-search"></i>
 			</button>
 			<div class="toggle-search">
-				<input type="text" class="form-control" placeholder="æœç´¢ç¬”è®°"
-					id='search_note'>
-				<button type="button" class="btn btn-default btn-collapse-search">
-					<i class="fa fa-times"></i>
-				</button>
+				<input type="text" class="form-control" placeholder="ËÑË÷±Ê¼Ç" id='search_note'>
+				<button type="button" class="btn btn-default btn-collapse-search"> <i class="fa fa-times"></i> </button>
 			</div>
 		</form>
 		<ul class="hidden-xs header-menu pull-right">
-			<li><a href="activity.html" target='_blank' title="ç¬”è®°æ´»åŠ¨">æ´»åŠ¨</a>
+			<li><a href="/my_note/activity" target='_blank' title="±Ê¼Ç»î¶¯">»î¶¯</a>
 			</li>
 		</ul>
 	</header>
@@ -113,9 +101,8 @@
 		<div class="col-xs-2" style='padding: 0;' id='pc_part_1'>
 			<!-- side-right -->
 			<div class="pc_top_first">
-				<h3>å…¨éƒ¨ç¬”è®°æœ¬</h3>
-				<button type="button" class="btn btn-default btn-xs btn_plus"
-					id='add_notebook'>
+				<h3>È«²¿±Ê¼Ç±¾</h3>
+				<button type="button" class="btn btn-default btn-xs btn_plus" id='add_notebook'>
 					<i class="fa fa-plus"></i>
 				</button>
 			</div>
@@ -124,32 +111,30 @@
 					<div class="chat-contact">
 						<div class="contact-body">
 							<ul class="contacts-list" id="book_ul">
-								<!-- åŠ¨æ€åŠ è½½ç¬”è®°æœ¬ -->
+								<!-- ¶¯Ì¬¼ÓÔØ±Ê¼Ç±¾ -->
 							</ul>
 						</div>
 					</div>
 				</div>
 			</aside>
 			<div class="row clear_margin">
-				<div class="col-xs-4 click" id='rollback_button' title='å›æ”¶ç«™'>
-					<i class='fa fa-trash-o'
-						style='font-size: 20px; line-height: 31px;'></i>
+				<div class="col-xs-4 click" id='rollback_button' title='»ØÊÕÕ¾'>
+					<i class='fa fa-trash-o' style='font-size: 20px; line-height: 31px;'></i>
 				</div>
-				<div class="col-xs-4 click" id='like_button' title='æ”¶è—ç¬”è®°æœ¬'>
+				<div class="col-xs-4 click" id='like_button' title='ÊÕ²Ø±Ê¼Ç±¾'>
 					<i class='fa fa-star' style='font-size: 20px; line-height: 31px;'></i>
 				</div>
-				<div class="col-xs-4 click" id='action_button' title='å‚åŠ æ´»åŠ¨ç¬”è®°'>
+				<div class="col-xs-4 click" id='action_button' title='²Î¼Ó»î¶¯±Ê¼Ç'>
 					<i class='fa fa-users' style='font-size: 20px; line-height: 30px;'></i>
 				</div>
 			</div>
 		</div>
-		<!-- å…¨éƒ¨ç¬”è®°æœ¬ -->
-		<!-- å…¨éƒ¨ç¬”è®° -->
+		<!-- È«²¿±Ê¼Ç±¾ -->
+		<!-- È«²¿±Ê¼Ç -->
 		<div class="col-xs-3" style='padding: 0;' id='pc_part_2'>
 			<div class="pc_top_second" id='notebookId'>
-				<h3>å…¨éƒ¨ç¬”è®°</h3>
-				<button type="button" class="btn btn-default btn-xs btn_plus"
-					id='add_note'>
+				<h3>È«²¿±Ê¼Ç</h3>
+				<button type="button" class="btn btn-default btn-xs btn_plus" id='add_note'>
 					<i class="fa fa-plus"></i>
 				</button>
 			</div>
@@ -165,26 +150,23 @@
 				</div>
 			</aside>
 		</div>
-		<!-- å…¨éƒ¨ç¬”è®° -->
-		<!-- å›æ”¶ç«™ç¬”è®° -->
+		<!-- È«²¿±Ê¼Ç -->
+		<!-- »ØÊÕÕ¾±Ê¼Ç -->
 		<div class="col-xs-3" style='padding: 0; display: none;'
 			id='pc_part_4'>
 			<div class="pc_top_second">
-				<h3>å›æ”¶ç«™ç¬”è®°</h3>
+				<h3>»ØÊÕÕ¾±Ê¼Ç</h3>
 			</div>
 			<aside class="side-right" id='four_side_right'>
 				<div class="module" data-toggle="niceScroll">
 					<div class="chat-contact">
 						<div class="contact-body">
 							<ul class="contacts-list">
-								<li class="disable"><a><i class="fa fa-file-text-o"
-										title="online" rel="tooltip-bottom"></i> è™šå‡å›æ”¶ç«™ç¬”è®°
-										<button type="button"
-											class="btn btn-default btn-xs btn_position btn_delete">
+								<li class="disable"><a><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> Ğé¼Ù»ØÊÕÕ¾±Ê¼Ç
+										<button type="button" class="btn btn-default btn-xs btn_position btn_delete">
 											<i class="fa fa-times"></i>
 										</button>
-										<button type="button"
-											class="btn btn-default btn-xs btn_position_2 btn_replay">
+										<button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay">
 											<i class="fa fa-reply"></i>
 										</button></a></li>
 							</ul>
@@ -193,12 +175,12 @@
 				</div>
 			</aside>
 		</div>
-		<!-- å›æ”¶ç«™ç¬”è®° -->
-		<!-- æœç´¢ç¬”è®°åˆ—è¡¨ -->
+		<!-- »ØÊÕÕ¾±Ê¼Ç -->
+		<!-- ËÑË÷±Ê¼ÇÁĞ±í -->
 		<div class="col-xs-3" style='padding: 0; display: none;'
 			id='pc_part_6'>
 			<div class="pc_top_second">
-				<h3>æœç´¢ç»“æœ</h3>
+				<h3>ËÑË÷½á¹û</h3>
 			</div>
 			<aside class="side-right" id='sixth_side_right'>
 				<div class="module" data-toggle="niceScroll">
@@ -208,60 +190,57 @@
 							</ul>
 						</div>
 					</div>
-					<div id='more_note'>æ›´å¤š...</div>
+					<div id='more_note'>¸ü¶à...</div>
 				</div>
 			</aside>
 		</div>
-		<!-- æœç´¢ç¬”è®°åˆ—è¡¨ -->
-		<!-- æ”¶è—ç¬”è®°åˆ—è¡¨ -->
-		<div class="col-xs-3" style='padding: 0; display: none;'
-			id='pc_part_7'>
+		<!-- ËÑË÷±Ê¼ÇÁĞ±í -->
+		<!-- ÊÕ²Ø±Ê¼ÇÁĞ±í -->
+		<div class="col-xs-3" style='padding: 0; display: none;' id='pc_part_7'>
 			<div class="pc_top_second">
-				<h3>å·²æ”¶è—ç¬”è®°</h3>
+				<h3>ÒÑÊÕ²Ø±Ê¼Ç</h3>
 			</div>
 			<aside class="side-right" id='seventh_side_right'>
 				<div class="module" data-toggle="niceScroll">
 					<div class="chat-contact">
 						<div class="contact-body">
 							<ul class="contacts-list">
-								<!--li class="idle"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> switchå¤šåˆ†æ”¯ç»“æ„<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button></a></li-->
+								<!--li class="idle"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> switch¶à·ÖÖ§½á¹¹<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button></a></li-->
 							</ul>
 						</div>
 					</div>
 				</div>
 			</aside>
 		</div>
-		<!-- æ”¶è—ç¬”è®°åˆ—è¡¨ -->
-		<!-- å‚åŠ æ´»åŠ¨çš„ç¬”è®°åˆ—è¡¨ -->
-		<div class="col-xs-3" style='padding: 0; display: none;'
-			id='pc_part_8'>
+		<!-- ÊÕ²Ø±Ê¼ÇÁĞ±í -->
+		<!-- ²Î¼Ó»î¶¯µÄ±Ê¼ÇÁĞ±í -->
+		<div class="col-xs-3" style='padding: 0; display: none;' id='pc_part_8'>
 			<div class="pc_top_second">
-				<h3>å‚åŠ æ´»åŠ¨çš„ç¬”è®°</h3>
+				<h3>²Î¼Ó»î¶¯µÄ±Ê¼Ç</h3>
 			</div>
 			<aside class="side-right" id='eighth_side_right'>
 				<div class="module" data-toggle="niceScroll">
 					<div class="chat-contact">
 						<div class="contact-body">
 							<ul class="contacts-list">
-								<!--li class="offline"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> æ ·å¼ç”¨ä¾‹ï¼ˆç‚¹å‡»æ— æ•ˆï¼‰</a></li-->
+								<!--li class="offline"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> ÑùÊ½ÓÃÀı£¨µã»÷ÎŞĞ§£©</a></li-->
 							</ul>
 						</div>
 					</div>
 				</div>
 			</aside>
 		</div>
-		<!-- å‚åŠ æ´»åŠ¨çš„ç¬”è®°åˆ—è¡¨ -->
-		<!-- ç¼–è¾‘ç¬”è®° -->
+		<!-- ²Î¼Ó»î¶¯µÄ±Ê¼ÇÁĞ±í -->
+		<!-- ±à¼­±Ê¼Ç -->
 		<div class="col-sm-7" id='pc_part_3'>
 			<!-- side-right -->
 			<div class="pc_top_third">
 				<div class="row">
 					<div class="col-xs-9">
-						<h3>ç¼–è¾‘ç¬”è®°</h3>
+						<h3>±à¼­±Ê¼Ç</h3>
 					</div>
 					<div class="col-xs-3">
-						<button type="button" class="btn btn-block btn-sm btn-primary"
-							id='save_note'>ä¿å­˜ç¬”è®°</button>
+						<button type="button" class="btn btn-block btn-sm btn-primary" id='save_note'>±£´æ±Ê¼Ç</button>
 					</div>
 				</div>
 			</div>
@@ -269,21 +248,19 @@
 				<div class="module" data-toggle="niceScroll">
 					<div class="chat-contact">
 						<div class="contact-body clear_margin">
-							<!--- ç¬”è®°æ ‡é¢˜ --->
+							<!--- ±Ê¼Ç±êÌâ --->
 							<div class="row">
 								<div class="col-xs-8">
-									<input type="text" class="form-control" id="input_note_title"
-										placeholder='ç¬”è®°æ ‡é¢˜...'>
+									<input type="text" class="form-control" id="input_note_title" placeholder='±Ê¼Ç±êÌâ...'>
 								</div>
 							</div>
-							<!--- ç¬”è®°æ ‡é¢˜ --->
+							<!--- ±Ê¼Ç±êÌâ --->
 							<div class="row">
 								<div class="col-sm-12">
-									<!--- è¾“å…¥æ¡†                     é€šè¿‡idçš„å¼•ç”¨å°†æ§ä»¶å¼•å…¥åˆ°è¿™é‡Œ --->
-									<script type="text/plain" id="myEditor"
-										style="width: 100%; height: 400px;">
+									<!--- ÊäÈë¿ò                     Í¨¹ıidµÄÒıÓÃ½«¿Ø¼şÒıÈëµ½ÕâÀï --->
+									<script type="text/plain" id="myEditor" style="width: 100%; height: 400px;">
 										</script>
-									<!--- è¾“å…¥æ¡† --->
+									<!--- ÊäÈë¿ò --->
 								</div>
 							</div>
 						</div>
@@ -291,13 +268,13 @@
 				</div>
 			</aside>
 		</div>
-		<!-- ç¼–è¾‘ç¬”è®° -->
-		<!-- é¢„è§ˆç¬”è®° -->
+		<!-- ±à¼­±Ê¼Ç -->
+		<!-- Ô¤ÀÀ±Ê¼Ç -->
 		<div class="col-sm-7" id='pc_part_5' style='display: none;'>
 			<div class="pc_top_third">
 				<div class="row">
 					<div class="col-xs-9">
-						<h3>é¢„è§ˆç¬”è®°</h3>
+						<h3>Ô¤ÀÀ±Ê¼Ç</h3>
 					</div>
 				</div>
 			</div>
@@ -312,7 +289,7 @@
 				</div>
 			</aside>
 		</div>
-		<!-- é¢„è§ˆç¬”è®° -->
+		<!-- Ô¤ÀÀ±Ê¼Ç -->
 	</div>
 	<footer>
 		<p>&copy; 2014 Stilearning</p>
@@ -322,7 +299,7 @@
 		</div>
 	</footer>
 	<script type="text/javascript">
-		//åŠ è½½DOMä¹‹åå¤„ç†é¡µé¢é«˜åº¦
+		//¼ÓÔØDOMÖ®ºó´¦ÀíÒ³Ãæ¸ß¶È
 		function get_dom(e) {
 			return document.getElementById(e);
 		}
@@ -344,7 +321,7 @@
 			get_dom('myEditor').style.width = style.width;
 		}
 		set_height();
-		//æ”¹å˜çª—å£å¤§å°æ—¶è°ƒæ•´é¡µé¢å°ºå¯¸
+		//¸Ä±ä´°¿Ú´óĞ¡Ê±µ÷ÕûÒ³Ãæ³ß´ç
 		window.onresize = function() {
 			set_height();
 			var width = $('#third_side_right').width() - 35;
@@ -352,30 +329,28 @@
 			$('#myEditor').width(width - 20);
 		};
 	</script>
-	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="./html/scripts/jquery.min.js"></script>
 
-	<!-- Bootstrapæ¡†æ¶JS -->
-	<script src="scripts/bootstrap.min.js"></script>
-	<script src="scripts/js-prototype.js"></script>
-	<script src="scripts/theme-setup.js"></script>
-	<!-- Google-Codeä»£ç é«˜äº®JS -->
-	<script class="re-execute" src="scripts/run_prettify.js"></script>
-	<!-- Ueditorç¼–è¾‘å™¨JS -->
-	<script type="text/javascript" charset="utf-8"
-		src="scripts/ue/umeditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="scripts/ue/umeditor.min.js"></script>
-	<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
+	<!-- Bootstrap¿ò¼ÜJS -->
+	<script src="./html/scripts/bootstrap.min.js"></script>
+	<script src="./html/scripts/js-prototype.js"></script>
+	<script src="./html/scripts/theme-setup.js"></script>
+	<!-- Google-Code´úÂë¸ßÁÁJS -->
+	<script class="re-execute" src="./html/scripts/run_prettify.js"></script>
+	<!-- Ueditor±à¼­Æ÷JS -->
+	<script type="text/javascript" charset="utf-8" src="./html/scripts/ue/umeditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./html/scripts/ue/umeditor.min.js"></script>
+	<script type="text/javascript" src="./html/scripts/ue/lang/zh-cn.js"></script>
 
 	<script type="text/javascript">
-		//é‡å†™JSåŸç”Ÿalertå‡½æ•°
+		//ÖØĞ´JSÔ­Éúalertº¯Êı
 		/* 	window.alert=function(e){
 				$('#can').load('./alert/alert_error.html',function(){
 					$('#error_info').text(' '+e);
 					$('.opacity_bg').show();
 				});
 			} */
-		//å®ä¾‹åŒ–Ueditorç¼–è¾‘å™¨
+		//ÊµÀı»¯Ueditor±à¼­Æ÷
 		var um = UM.getEditor('myEditor');
 	</script>
 </body>
